@@ -1,0 +1,9 @@
+create table customer_packages(
+cust_id Number(38),
+packages varchar(225),
+amount Number(10),
+purchase_date varchar(225)
+);
+drop table customer_packages;
+
+select * from customer_packages;

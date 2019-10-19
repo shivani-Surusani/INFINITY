@@ -1,0 +1,98 @@
+
+
+create table stb (
+stb_id number(10) primary key,
+stb_type varchar(20),
+stb_features varchar(20),
+stb_length dec(10),
+stb_breadth dec(10),
+stb_width dec(10),
+stb_price dec(10),
+stb_installation_charges dec(10),
+stb_upgradation_charges dec(10),
+stb_discount dec(10),
+stb_billing_type varchar(20),
+stb_refundable_deposit_amount dec(10)
+);
+
+select * from stb;
+
+create table stb_inventory(
+stb_inventory_id number(10) NOT NULL,
+stb_type varchar(20) NOT NULL,
+stb_serial_number number(20),
+stb_mac_id number(20) UNIQUE,
+remote_asset_id number(10),
+dish_asset_id number(10),
+stb_status varchar(10)
+);
+
+create table customer1(
+cust_id number(10) primary key,
+retailer_id number(10),
+cust_fname varchar(20),
+cust_lname varchar(20),
+cust_email varchar(20)
+);
+
+create table stb_bill(
+bill_id number(10) primary key,
+cust_id number(10),
+stb_inventory_id number(10),
+payment_type varchar(20),
+CONSTRAINT fk_customer
+FOREIGN KEY (cust_id ) REFERENCES customer(cust_id),
+CONSTRAINT fk_stb_inventory
+FOREIGN KEY (stb_inventory_id ) REFERENCES stb_inventory(stb_inventory_id)
+);
+
+INSERT INTO customer1 VALUES (1,'Yash','Chaudhari','abc1@gmail.com',110);
+INSERT INTO customer1 VALUES (2,'Pankaj','Tulaskar','bcd2@gmail.com',111);
+INSERT INTO customer1 VALUES (3,'Saloni','Jain','cef3@gmail.com',112,);
+INSERT INTO customer1 VALUES (4,'Shivani','Reddy','fgh4@gmail.com',113);
+INSERT INTO customer1 VALUES (5,'Sanjana','Sidduri','ijk5@gmail.com',114);
+INSERT INTO customer1 VALUES (6,'Palak','Sidduri','i5@gmail.com','');
+
+select * from customer1;
+
+delete from customer1 where cust_fname='Kaushik';
+
+INSERT INTO stb values(10,'standard','live recording',10.5,12.5,6.5,2000,500,1000,10,'prepaid',500);
+INSERT INTO stb values(11,'standard','child lock',11.5,13.5,7.5,2100,510,1100,20,'postpaid',600);
+INSERT INTO stb values(12,'hd','live recording',12.5,14.5,8.5,2200,520,1200,30,'prepaid',650);
+INSERT INTO stb values(13,'hd','child lock',13.5,15.5,9.5,2300,530,1300,40,'postpaid',700);
+INSERT INTO stb values(14,'hd+','live recording',14.5,16.5,10.5,2400,540,1400,50,'prepaid',750);
+INSERT INTO stb values(15,'hd+','child lock',15.5,17.5,11.5,2500,550,1500,60,'postpaid',800);
+INSERT INTO stb values(16,'iptv','live recording',16.5,18.5,12.5,2600,560,1600,70,'prepaid',850);
+INSERT INTO stb values(17,'iptv','child lock',17.5,19.5,13.5,2700,570,1700,80,'postpaid',900);
+
+select * from stb;
+
+delete from stb where stb_id=11;
+
+INSERT into stb_inventory1 values(20,'standard',001,234,567,100,'unassigned');
+INSERT into stb_inventory1 values(21,'standard',002,236,570,104,'unassigned');
+INSERT into stb_inventory1 values(22,'hd',003,238,573,108,'unassigned');
+INSERT into stb_inventory1 values(23,'hd',004,240,576,112,'unassigned');
+INSERT into stb_inventory1 values(24,'hd+',005,242,579,116,'unassigned');
+INSERT into stb_inventory1 values(25,'hd+',006,244,582,120,'unassigned');
+INSERT into stb_inventory1 values(26,'iptv',007,246,585,124,'unassigned');
+INSERT into stb_inventory1 values(27,'iptv',008,248,588,128,'unassigned');
+
+select * from stb_inventory1;
+select * from customer1;
+select * from stb;
+
+select * from stb inner join stb_inventory1 on stb.stb_type= stb_inventory1.stb_type;
+
+select *from stb inner join stb_inventory1
+on stb.stb_type = stb_inventory1.stb_type where (stb.stb_type = 'hd' AND stb.stb_billing_type = 'postpaid');
+
+	select stb.stb_type,stb.stb_features,stb.stb_length,stb.stb_breadth,stb.stb_width,stb.stb_price,stb.stb_installation_charges,stb.stb_upgradation_charges,stb.stb_discount,stb.stb_billing_type,stb.stb_refundable_deposit_amount from stb inner join stb_inventory1 on stb.stb_type = stb_inventory1.stb_type where (stb.stb_type = 'hd' AND stb.stb_billing_type = 'prepaid' AND stb_inventory1.stb_status='unassigned');
+	
+	
+select stb_inventory1.stb_type,stb_inventory1.stb_mac_id,stb_inventory1.stb_serial_number,stb.stb_price,stb.stb_installation_charges,stb.stb_refundable_deposit_amount,stb.stb_discount from stb inner join stb_inventory1 on stb.stb_type = stb_inventory1.stb_type where (stb.stb_type = 'hd' AND stb.stb_billing_type = 'postpaid' AND stb_inventory1.stb_status='unassigned');
+	
+select stb_inventory1.stb_type,stb_inventory1.stb_mac_id,stb_inventory1.stb_serial_number,stb.stb_price,stb.stb_installation_charges,stb.stb_refundable_deposit_amount,stb.stb_discount from stb inner join stb_inventory1 on stb.stb_type = stb_inventory1.stb_type where (stb.stb_type = 'hd' AND stb.stb_billing_type = 'postpaid' AND stb_inventory1.stb_status='unassigned');
+		
+select stb.stb_type,stb.stb_features,stb.stb_length,stb.stb_breadth,stb.stb_width,stb.stb_price,stb.stb_installation_charges,stb.stb_upgradation_charges,stb.stb_discount,stb.stb_billing_type,stb.stb_refundable_deposit_amount from stb inner join stb_inventory1 on stb.stb_type = stb_inventory1.stb_type where (stb.stb_type = ? AND stb.stb_billing_type = ? AND stb_inventory1.stb_status='unassigned')

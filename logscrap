@@ -1,0 +1,13 @@
+create table login(
+cust_id number(38),
+Password varchar(20),
+Role varchar(20)
+);
+
+INSERT INTO login VALUES (1,'yash','customer');
+INSERT INTO login VALUES (2,'Pankaj','customer');
+INSERT INTO login VALUES (3,'Saloni','customer');
+INSERT INTO login VALUES (4,'Shivani','customer');
+INSERT INTO login VALUES (5,'Sanjana','customer');
+
+select *from login;

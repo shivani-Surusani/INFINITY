@@ -1,0 +1,54 @@
+select * from stb_bill;
+
+create table stb_bill(
+bill_id number(10) primary key,
+cust_id number(10),
+stb_inventory_id number(10),
+payment_type varchar(20),
+FOREIGN KEY (cust_id ) REFERENCES customer(cust_id),
+FOREIGN KEY (stb_inventory_id ) REFERENCES stb_inventory(stb_inventory_id)
+);
+
+select * from customer1;
+
+drop table  stb_inventory;
+
+create table stb_inventory(
+stb_inventory_id number(10) NOT NULL,
+stb_type varchar(20) NOT NULL,
+stb_serial_number number(20),
+stb_mac_id number(20) UNIQUE,
+remote_asset_id number(10),
+dish_asset_id number(10),
+stb_status varchar(10)
+);
+INSERT into stb_inventory values(20,'standard',001,234,567,100,'unassigned');
+INSERT into stb_inventory values(21,'standard',002,236,570,104,'unassigned');
+INSERT into stb_inventory values(22,'hd',003,238,573,108,'unassigned');
+INSERT into stb_inventory values(23,'hd',004,240,576,112,'unassigned');
+INSERT into stb_inventory values(24,'hd+',005,242,579,116,'unassigned');
+INSERT into stb_inventory values(25,'hd+',006,244,582,120,'unassigned');
+INSERT into stb_inventory values(26,'iptv',007,246,585,124,'unassigned');
+INSERT into stb_inventory values(27,'iptv',008,248,588,128,'unassigned');
+
+ALTER TABLE stb_inventory
+DISABLE CONSTRAINT STB_INVENTORY_ID;
+drop table stb_bill;
+
+create table stb_bill(
+cust_id number(10),
+bill_type varchar(20),
+stb_amt dec(10),
+constraint fk_customer
+foreign key (cust_id) references customer1(cust_id)
+);
+create sequence bill_id;
+select * from stb_inventory;
+select * from stb_bill;
+select * from stb;
+select * from customer_packages;
+insert into stb_bill values(1,'prepaid',4280.0)
+
+select stb_inventory.stb_mac_id from stb inner join stb_inventory on stb.stb_type = stb_inventory.stb_type where (stb.stb_type = 'hd' AND stb.stb_billing_type = 'postpaid' AND stb_inventory.stb_status='unassigned');
+
+

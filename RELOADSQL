@@ -1,0 +1,17 @@
+select * from STB_Inventory
+
+update STB_INVENTORY set STB_STATUS='unassigned';
+
+create table customer_packages(
+cust_id Number(38),
+packages varchar(225),
+amount dec(10),
+purchase_date varchar(225)
+);
+drop table customer_packages;
+
+select * from customer_packages;
+
+select* from customer1
+
+select* from login

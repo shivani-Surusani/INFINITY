@@ -1,0 +1,1 @@
+select cust_fname,cust_lname from customer1 where cust_id=2;
