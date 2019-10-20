@@ -1,1 +1,125 @@
-select cust_fname,cust_lname from customer1 where cust_id=2;
+select * from customer1
+
+create table customer1(
+cust_id number(10) primary key,
+cust_fname varchar(20),
+cust_lname varchar(20),
+cust_email varchar(20),
+retailer_id number(10)
+);
+
+
+
+drop table customer1
+
+INSERT INTO customer1 VALUES (1,'Yash','Chaudhari','abc1@gmail.com',701);
+INSERT INTO customer1 VALUES (702,'Shivani','Reddy','xyz1@gmail.com','');
+
+
+INSERT INTO customer1 VALUES (2,'Pankaj','Tulaskar','bcd2@gmail.com',901);
+INSERT INTO customer1 VALUES (3,'Saloni','Jain','cef3@gmail.com',904);
+INSERT INTO customer1 VALUES (4,'Shivani','Reddy','fgh4@gmail.com',902);
+INSERT INTO customer1 VALUES (5,'Sanjana','Sidduri','ijk5@gmail.com',903);
+INSERT INTO customer1 VALUES (6,'Palak','Sidduri','i@gmail.com','');
+
+create table login(
+cust_id number(38),
+Password varchar(20) NOT NULL,
+Role varchar(20) NOT NULL,
+FOREIGN KEY (cust_id ) REFERENCES customer1(cust_id)
+);
+
+drop table login
+
+INSERT INTO login VALUES (1,'yash','customer');
+INSERT INTO login VALUES (2,'Pankaj','customer');
+INSERT INTO login VALUES (3,'Saloni','customer');
+INSERT INTO login VALUES (4,'Shivani','customer');
+INSERT INTO login VALUES (5,'Sanjana','customer');
+INSERT INTO login VALUES (6,'Palak','customer');
+INSERT INTO login VALUES (702,'Reddy','customer');
+
+
+select * from login;
+
+create table stb (
+stb_id number(10) primary key,
+stb_type varchar(20),
+stb_features varchar(20),
+stb_length dec(10),
+stb_breadth dec(10),
+stb_width dec(10),
+stb_price dec(10),
+stb_installation_charges dec(10),
+stb_upgradation_charges dec(10),
+stb_discount dec(10),
+stb_billing_type varchar(20),
+stb_refundable_deposit_amount dec(10)
+);
+
+create table stb_inventory1(
+stb_inventory_id number(10) NOT NULL,
+stb_type varchar(20) NOT NULL,
+stb_serial_number number(20),
+stb_mac_id varchar(15) UNIQUE,
+remote_asset_id number(10),
+dish_asset_id number(10),
+stb_status varchar(10)
+);
+INSERT into stb_inventory1 values(20,'standard',001,'255.254.138.111',567,100,'unassigned');
+INSERT into stb_inventory1 values(21,'standard',002,'123.255.111.128',570,104,'unassigned');
+INSERT into stb_inventory1 values(22,'hd',003,'222.111.000.101',573,108,'unassigned');
+INSERT into stb_inventory1 values(23,'hd',004,'121.111.001.110',576,112,'unassigned');
+INSERT into stb_inventory1 values(24,'hd+',005,'121.222.200.118',579,116,'unassigned');
+INSERT into stb_inventory1 values(25,'hd+',006,'161.181.218.225',582,120,'unassigned');
+INSERT into stb_inventory1 values(26,'iptv',007,'115.117.250.212',585,124,'unassigned');
+INSERT into stb_inventory1 values(27,'iptv',008,'113.151.131.111',588,128,'unassigned');
+
+select * from stb_inventory1
+
+drop table stb_bill;
+
+create table stb_bill(
+cust_id number(10),
+bill_type varchar(20),
+stb_amt dec(10),
+constraint fk_customer
+foreign key (cust_id) references customer1(cust_id)
+);
+create sequence bill_id;
+
+
+INSERT INTO stb values(10,'standard','live recording',10.5,12.5,6.5,2000,500,1000,10,'prepaid',500);
+INSERT INTO stb values(11,'standard','child lock',11.5,13.5,7.5,2100,510,1100,20,'postpaid',0);
+INSERT INTO stb values(12,'hd','live recording',12.5,14.5,8.5,2200,520,1200,30,'prepaid',650);
+INSERT INTO stb values(13,'hd','child lock',13.5,15.5,9.5,2300,530,1300,40,'postpaid',0);
+INSERT INTO stb values(14,'hd+','live recording',14.5,16.5,10.5,2400,540,1400,50,'prepaid',750);
+INSERT INTO stb values(15,'hd+','child lock',15.5,17.5,11.5,2500,550,1500,60,'postpaid',0);
+INSERT INTO stb values(16,'iptv','live recording',16.5,18.5,12.5,2600,560,1600,70,'prepaid',850);
+INSERT INTO stb values(17,'iptv','child lock',17.5,19.5,13.5,2700,570,1700,80,'postpaid',0);
+
+INSERT INTO stb values(18,'standard','slow motion',12.5,14.5,8.5,3000,600,1200,20,'prepaid',700);
+INSERT INTO stb values(19,'standard','preview screen',14,15,7,2500,700,1300,40,'postpaid',0);
+
+INSERT INTO stb values(20,'hd','rewind/forward',15,17,6.5,2700,550,1300,30,'prepaid',500);
+INSERT INTO stb values(21,'hd','slow motion',14,13,7,2400,570,1800,20,'postpaid',0);
+
+INSERT INTO stb values(22,'hd+','scheduled recording',11,13,7,2600,800,1300,30,'prepaid',530);
+INSERT INTO stb values(23,'hd+','slow motion',25,12,7,2500,560,1400,40,'postpaid',0);
+
+INSERT INTO stb values(24,'iptv','rewind forward',14,18,9,2800,850,1500,50,'prepaid',520);
+INSERT INTO stb values(25,'iptv','child lock',15,17,8,2500,560,1250,70,'postpaid',0);
+
+create table customer_packages(
+cust_id Number(38),
+packages varchar(225),
+amount Number(10),
+purchase_date varchar(225)
+);
+drop table customer_packages;
+
+select * from customer_packages;
+
+/* make stb as unassigned for testing process */
+
+update STB_INVENTORY set STB_STATUS='unassigned';

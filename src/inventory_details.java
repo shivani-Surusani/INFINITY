@@ -36,7 +36,7 @@ public class inventory_details {
 	public List<List<String>> search_inventory(String STB_type,String billing_type) throws SQLException{
 			List<String> al=null;
 		  List emp_list =new ArrayList();
-		  String query = "select stb.stb_type,stb.stb_features,stb.stb_length,stb.stb_breadth,stb.stb_width,stb.stb_price,stb.stb_installation_charges,stb.stb_upgradation_charges,stb.stb_discount,stb.stb_billing_type,stb.stb_refundable_deposit_amount from stb inner join stb_inventory on stb.stb_type = stb_inventory.stb_type where (stb.stb_type = ? AND stb.stb_billing_type = ? AND stb_inventory.stb_status='unassigned')";
+		  String query = "select stb.stb_type,stb.stb_features,stb.stb_length,stb.stb_breadth,stb.stb_width,stb.stb_price,stb.stb_installation_charges,stb.stb_upgradation_charges,stb.stb_discount,stb.stb_billing_type,stb.stb_refundable_deposit_amount from stb inner join stb_inventory1 on stb.stb_type = stb_inventory1.stb_type where (stb.stb_type = ? AND stb.stb_billing_type = ? AND stb_inventory1.stb_status='unassigned')";
 		 
 		  st = conn.prepareStatement(query);
 		  st.setString(1,STB_type);

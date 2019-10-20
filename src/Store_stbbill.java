@@ -19,11 +19,11 @@ public class Store_stbbill {
 		  System.out.println("query " + query);
 		  ResultSet  rs1 = sttt.executeQuery();
 		  rs1.next();
-		  int mac_id= rs1.getInt(1);
+		  String mac_id= rs1.getString(1);
 		  
 		  String query2="UPDATE stb_inventory SET stb_status ='assigned' WHERE stb_mac_id=?";
 		  PreparedStatement ppp=conn.prepareStatement(query2);
-		  ppp.setInt(1,mac_id);
+		  ppp.setString(1,mac_id);
 		  System.out.println("query " + query2);
 		  ppp.executeUpdate();
 		  rs1.close();

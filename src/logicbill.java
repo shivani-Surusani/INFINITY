@@ -12,7 +12,7 @@ public class logicbill {
 	public List<String> bill_inventory(String STB_type,String billing_type,Integer cust_id) throws SQLException{
 			List<String> al1=null;
 			conn = DbConnector.getInstance();
-		  String query = "select stb_inventory.stb_type,stb_inventory.stb_mac_id,stb_inventory.stb_serial_number,stb.stb_price,stb.stb_installation_charges,stb.stb_refundable_deposit_amount,stb.stb_discount from stb inner join stb_inventory on stb.stb_type = stb_inventory.stb_type where (stb.stb_type = ? AND stb.stb_billing_type = ? AND stb_inventory.stb_status='unassigned')";
+		  String query = "select stb_inventory1.stb_type,stb_inventory1.stb_mac_id,stb_inventory1.stb_serial_number,stb.stb_price,stb.stb_installation_charges,stb.stb_refundable_deposit_amount,stb.stb_discount from stb inner join stb_inventory1 on stb.stb_type = stb_inventory1.stb_type where (stb.stb_type = ? AND stb.stb_billing_type = ? AND stb_inventory1.stb_status='unassigned')";
 		  System.out.println("id "+cust_id);
 		  System.out.println("stb type"+STB_type+" "+billing_type);
 		  st = conn.prepareStatement(query);
@@ -40,7 +40,7 @@ public class logicbill {
 		  al1.add(name);
 		  al1.add(rs1.getString(1));
 //		  System.out.println("a"+al1);
-		  al1.add(Double.toString(rs1.getDouble(2)));
+		  al1.add(rs1.getString(2));
 	//	  System.out.println("a"+al1);
 		  al1.add(Double.toString(rs1.getDouble(3)));
 //		  System.out.println("a"+al1);
